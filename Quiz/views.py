@@ -53,6 +53,7 @@ def addQuestion(request):
 
 
 def registerPage(request):
+    print(request.POST)
     if request.user.is_authenticated:
         return redirect('home')
     else:
@@ -86,3 +87,10 @@ def loginPage(request):
 def logoutPage(request):
     logout(request)
     return redirect('/')
+
+def topics(request):
+    topics = Topic.objects.order_by("name")
+    context = {
+        'topics': topics
+    }
+    return render(request, 'Quiz/topics.html', context)
