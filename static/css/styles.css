@@ -57,3 +57,19 @@ span.v-line {
   border-radius: 10px;
   margin-right: 5px;
 }
+div.topic.col-6 {
+  flex: 0 0 auto;
+  width: 48%;
+}
+@media (min-width: 768px) {
+  div.topic.col-md-4 {
+    flex: 0 0 auto;
+    width: 32%;
+  }
+}
+@media (min-width: 992px) {
+  div.topic.col-lg-3 {
+    flex: 0 0 auto;
+    width: 23%;
+  }
+}
