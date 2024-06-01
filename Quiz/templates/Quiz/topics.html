@@ -1,0 +1,23 @@
+{% extends "Quiz/dependencies.html" %} {% load static %} {% block content %}
+<main class="row gap-3">
+  {% for t in topics %}
+  <div class="col-6 col-md-4 col-lg-3 card">
+    <div>
+      <img
+        class="card-img-top"
+        src="https://picsum.photos/id/3/500"
+        alt="{{t.name}}"
+      />
+    </div>
+    <div class="card-body">
+      <h4 class="card-header">{{t.name}}</h4>
+      <p class="card-text">{{t.description}}</p>
+      <a class="btn btn-primary" href="/topics/{{t.id}}">Explore</a>
+      {% if request.user.is_staff %}
+      <a class="btn btn-primary" href="/topics/{{t.id}}/create">Create</a>
+      {% endif %}
+    </div>
+  </div>
+  {% endfor %}
+</main>
+{% endblock content %}
