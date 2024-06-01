@@ -1,9 +1,22 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+a {
+  text-decoration: none;
+  color: aquamarine;
+}
+.row {
+  margin-right: 0;
+}
 nav {
   box-shadow: 0 2px 5px 0 lightgrey;
 }
-
-main {
-  background: linear-gradient(#39344a, #265369);
+h3 {
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+}
+body {
+  background: linear-gradient(#003346, #265369);
   color: white;
 }
 .landing div h2 span {
@@ -24,8 +37,23 @@ main {
 .form-control::placeholder {
   color: lightgrey;
 }
+nav .form-control:first-of-type::placeholder {
+  color: rgb(41, 41, 41);
+}
 .form-control:focus {
   background: #39344a;
   caret-color: whitesmoke;
   color: whitesmoke;
+}
+main hr.d-block:first-of-type {
+  margin-bottom: 4em;
+  margin-top: -3em;
+}
+span.v-line {
+  width: 10px;
+  display: inline-block;
+  background: #486c84;
+  height: 90px;
+  border-radius: 10px;
+  margin-right: 5px;
 }
