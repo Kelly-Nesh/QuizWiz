@@ -1,0 +1,67 @@
+{% extends 'Quiz/dependencies.html' %} {% load static %} {% block content %}
+<main>
+  <div class="landing vh-100 row justify-content-around align-items-center">
+    <div class="col-5">
+      <h2>
+        <span>Quizzie</span> is a place to <br /><span>learn</span>, <br /><span>grow</span>
+        <br />and <br /><span>develop.</span>
+      </h2>
+    </div>
+    <div class="col-4">
+      <form action="" method="post">
+        {% csrf_token %}
+        <h2>Create an account</h2>
+        <p>No subscriptions. Membership is free, forever!</p>
+        <div class="d-flex justify-content-between mb-3">
+          <input
+            type="text"
+            name="first_name"
+            placeholder="First Name"
+            required
+            class="form-control me-2"
+          />
+          <input
+            type="text"
+            name="last_name"
+            placeholder="Last Name"
+            class="form-control"
+          />
+        </div>
+        <input
+          type="email"
+          name="email"
+          placeholder="Email"
+          class="form-control mb-3"
+          required
+        />
+        <input
+          type="password"
+          name="password"
+          placeholder="Password"
+          required
+          class="form-control mb-3"
+        />
+        <input
+          type="password"
+          name="confirm_password"
+          placeholder="Confirm Password"
+          required
+          class="form-control mb-3"
+        />
+        <button type="submit" class="btn btn-primary mb-3 d-block mx-auto">
+          Submit
+        </button>
+      </form>
+    </div>
+  </div>
+  <section class="section-1 row">
+    <div class-"col-7">
+      <h3 class="display-4 text-uppercase">Explore topics</h3>
+      <p class="">Quizzie offers thousands of questions across various categories, including Science, Mathematics, History, Geography, Literature, and more1. Whether you’re a student looking to ace your exams or a teacher aiming to create captivating quizzes, Quizzie ensures there’s always something new to learn.</p>
+    </div>
+    <div class="col-4">
+      <img src="https://picsum.photos" alt="random img" class="img-fluid rounded-3"/>
+    </div>
+  </section>
+</main>
+{% endblock content %}
