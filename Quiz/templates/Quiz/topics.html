@@ -2,11 +2,16 @@
 <main class="row ps-2 pt-2 g-4 justify-content-evenly bg-white text-black">
   <h2>Get Quizzie: Explore Our Topics</h2>
   <h4>
-    Discover quizzes in these exciting categories: <i>Science, Literature, Music,
-    Sports, and more!</i>
+    Discover quizzes in these exciting categories:
+    <i>Science, Literature, Music, Sports, and more!</i>
   </h4>
-  {% for t in topics %}
-  <div class="card topic p-2 col-6 col-md-4 col-lg-3 ">
+  {% if not request.user.is_authenticated %}
+  <p class='h4'>
+    <a class="btn btn-outline-primary" href="/login/">Login</a> to take a
+    quiz.
+  </p>
+  {% endif %} {% for t in topics %}
+  <div class="card topic p-2 col-6 col-md-4 col-lg-3">
     <div>
       <img
         class="card-img-top object-fit-cover rounded-5"
@@ -18,9 +23,12 @@
     <div class="card-body mt-2 bg-dark-subtle rounded-2">
       <h4 class="card-header">{{t.name}}</h4>
       <p class="card-text">{{t.description}}</p>
-      <a class="btn btn-outline-primary" href="/topics/{{t.slug}}">Explore</a>
       {% if request.user.is_staff %}
-      <a class="btn btn-primary" href="/topics/{{t.slug}}/create">Create</a>
+      <a class="btn btn-outline-secondary" href="/topics/{{t.slug}}/create"
+        >Add</a
+      >
+      {% endif %} {% if request.user.is_authenticated %}
+      <a class="btn btn-outline-dark" href="/topics/{{t.slug}}/">Take test</a>
       {% endif %}
     </div>
   </div>
