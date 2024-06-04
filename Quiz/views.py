@@ -91,10 +91,13 @@ def quiz(request, slug):
             'time': request.POST.get('timer'),
             'correct': correct,
             'wrong': wrong,
-            'percent': percent,
+            'percent': int(percent),
             'total': total
         }
-        Scores.objects.create(user=request.user, topic=Topic.objects.get(slug=slug), score=score)
+        sc = Scores.objects.get_or_create(
+            user=request.user, topic=Topic.objects.get(slug=slug))
+        sc[0].score = percent
+        sc[0].save()
         return render(request, 'Quiz/result.html', context)
     else:
         context = {
@@ -103,6 +106,7 @@ def quiz(request, slug):
         }
         # print(questions)
         return render(request, 'Quiz/quiz-page.html', context)
+
 
 def score(request):
     user = request.user
