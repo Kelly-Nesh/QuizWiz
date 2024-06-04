@@ -1,7 +1,7 @@
 from django.shortcuts import redirect, render
 from django.contrib.auth import login, logout, authenticate
 from .forms import addQuestionform, createuserform
-from .models import Topic, Question
+from .models import Topic, Question, Scores
 from django.http import HttpResponse
 import random
 
@@ -78,8 +78,9 @@ def quiz(request, slug):
         correct = 0
         total = 0
         for q in questions:
+            print(q.ans, request.POST.get(q.question))
             total += 1
-            if q.ans == int(request.POST.get(q.question)):
+            if q.ans == int(request.POST.get(q.question) or 5):
                 score += 10
                 correct += 1
             else:
@@ -93,6 +94,7 @@ def quiz(request, slug):
             'percent': percent,
             'total': total
         }
+        Scores.objects.create(user=request.user, topic=Topic.objects.get(slug=slug), score=score)
         return render(request, 'Quiz/result.html', context)
     else:
         context = {
@@ -101,3 +103,8 @@ def quiz(request, slug):
         }
         # print(questions)
         return render(request, 'Quiz/quiz-page.html', context)
+
+def score(request):
+    user = request.user
+    scores = Scores.objects.filter(user=user)
+    return render(request, "Quiz/user-details.html", {"scores": scores})

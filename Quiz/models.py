@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils.text import slugify
+from django.contrib.auth.models import User
 
 
 class Topic(models.Model):
@@ -29,3 +30,9 @@ class Question(models.Model):
 
     def __str__(self):
         return self.question
+
+
+class Scores(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    topic = models.ForeignKey(Topic, on_delete=models.CASCADE)
+    score = models.PositiveSmallIntegerField(null=True, blank=True)
