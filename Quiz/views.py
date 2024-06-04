@@ -1,41 +1,13 @@
 from django.shortcuts import redirect, render
 from django.contrib.auth import login, logout, authenticate
-from .forms import *
-from .models import *
+from .forms import addQuestionform, createuserform
+from .models import Topic, Question
 from django.http import HttpResponse
+import random
 
 
 def home(request):
-    if request.method == 'POST':
-        print(request.POST)
-        questions = QuesModel.objects.all()
-        score = 0
-        wrong = 0
-        correct = 0
-        total = 0
-        for q in questions:
-            total += 1
-            if q.ans == request.POST.get(q.question):
-                score += 10
-                correct += 1
-            else:
-                wrong += 1
-        percent = score/(total*10) * 100
-        context = {
-            'score': score,
-            'time': request.POST.get('timer'),
-            'correct': correct,
-            'wrong': wrong,
-            'percent': percent,
-            'total': total
-        }
-        return render(request, 'Quiz/result.html', context)
-    else:
-        questions = QuesModel.objects.all()
-        context = {
-            'questions': questions
-        }
-        return render(request, 'Quiz/home.html', context)
+    return render(request, 'Quiz/home.html')
 
 
 def addQuestion(request):
@@ -88,9 +60,44 @@ def logoutPage(request):
     logout(request)
     return redirect('/')
 
+
 def topics(request):
     topics = Topic.objects.order_by("name")
     context = {
         'topics': topics
     }
     return render(request, 'Quiz/topics.html', context)
+
+
+def quiz(request, slug):
+    questions = Question.objects.filter(topic__slug=slug)
+
+    if request.method == 'POST':
+        score = 0
+        wrong = 0
+        correct = 0
+        total = 0
+        for q in questions:
+            total += 1
+            if q.ans == int(request.POST.get(q.question)):
+                score += 10
+                correct += 1
+            else:
+                wrong += 1
+        percent = score/(total*10) * 100
+        context = {
+            'score': score,
+            'time': request.POST.get('timer'),
+            'correct': correct,
+            'wrong': wrong,
+            'percent': percent,
+            'total': total
+        }
+        return render(request, 'Quiz/result.html', context)
+    else:
+        context = {
+            'questions': questions,
+            'topic': Topic.objects.get(slug=slug).name
+        }
+        # print(questions)
+        return render(request, 'Quiz/quiz-page.html', context)

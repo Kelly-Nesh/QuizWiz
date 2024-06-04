@@ -10,6 +10,6 @@ class createuserform(UserCreationForm):
 
 class addQuestionform(ModelForm):
     class Meta:
-        model=QuesModel
+        model=Question
         fields="__all__"
     
