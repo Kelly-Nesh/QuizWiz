@@ -1,12 +1,12 @@
 {% extends 'Quiz/dependencies.html' %}
 {% load static%}
 {% block content %}
-<div class="container jumbotron">
-    <form method="POST" action="">
+<div class="container jumbotron mt-5">
+    <form method="POST" action="" class='row' style="max-width: 450px">
         {% csrf_token %}
-        <p><input type="text" name="username" placeholder="Username..."></p>
-        <p><input type="password" name="password" placeholder="Password..." ></p>
-        <input class="btn btn-success" type="submit" value="Login">
+        <p class=""><input class="form-control" type="text" name="username" placeholder="Username..."></p>
+        <p class=""><input class="form-control" type="password" name="password" placeholder="Password..." ></p>
+        <input class="btn btn-success form-control w-50 mx-auto" type="submit" value="Login">
         <p>Do not have an account <a href='{% url 'register' %}'>Register</a></p>
     </form>
 </div>
