@@ -39,13 +39,17 @@
           </li>
           {% else %}
           <li class="nav-item">
-            <a href="/admin/" class="nav-link">{{request.user | title}}</a>
+            <a href="{% url 'score' %}" class="nav-link"
+              >{{request.user | title}}</a
+            >
           </li>
           <li class="nav-item">
             <a class="nav-link" href="{% url 'logout' %}">Logout</a>
           </li>
           {% endif %}
-          <li class="nav-item"><a href="{% url 'topics' %}" class="nav-link">Topics</a></li>
+          <li class="nav-item">
+            <a href="{% url 'topics' %}" class="nav-link">Topics</a>
+          </li>
         </ul>
 
         {% if request.user.is_staff %}
