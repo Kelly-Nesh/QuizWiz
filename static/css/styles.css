@@ -1,7 +1,7 @@
 * {
   margin: 0;
   padding: 0;
-  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
 }
 a {
   text-decoration: none;
@@ -61,6 +61,24 @@ span.v-line {
 div.topic.col-6 {
   flex: 0 0 auto;
   width: 48%;
+}
+form.add-q p input, form.add-q select {
+  background: transparent;
+  color: #f5f5f5;
+  border-color: #637b86;
+  display: block;
+  width: 100%;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--bs-body-color);
+  appearance: none;
+  background-color: var(--bs-body-bg);
+  background-clip: padding-box;
+  border: var(--bs-border-width) solid var(--bs-border-color);
+  border-radius: var(--bs-border-radius);
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 @media (min-width: 768px) {
   div.topic.col-md-4 {
