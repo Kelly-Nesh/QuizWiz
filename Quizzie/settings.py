@@ -1,13 +1,14 @@
 from pathlib import Path
+from dotenv import load_dotenv
+import os
 
+load_dotenv()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '36jk%az^il&d66&dhy(j*!hu9b!oa2imidr5bwqcpwcuwz3cj8'
+SECRET_KEY = os.getenv("SECRET_KEY")
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.getenv("DEBUG") == "True"
 
 ALLOWED_HOSTS = ["*"]
 
@@ -21,6 +22,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
     'Quiz',
 ]
 
@@ -34,7 +36,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'DjangoQuiz.urls'
+ROOT_URLCONF = 'Quizzie.urls'
 
 TEMPLATES = [
     {
@@ -52,22 +54,22 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'DjangoQuiz.wsgi.application'
-
-
-# Database
-# https://docs.djangoproject.com/en/3.1/ref/settings/#databases
+WSGI_APPLICATION = 'Quizzie.wsgi.application'
 
 DATABASES = {
     'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'quizzie',
+        'USER': 'nesh',
+        'PASSWORD': os.getenv("PASSWORD", ""),
+        "HOST": "localhost",
+        "PORT": 3306,
+    },
+    'backup': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
-
-# Password validation
-# https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -85,20 +87,16 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
-# Internationalization
-# https://docs.djangoproject.com/en/3.1/topics/i18n/
-
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Africa/Nairobi'
 
 USE_I18N = True
 
-USE_L10N = True
-
 USE_TZ = True
 
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-STATIC_URL = '/static/'
-STATICFILES_DIRS = [BASE_DIR/'static']
+STATIC_URL = 'static/'
+STATIC_FILES_DIRS = os.path.join(BASE_DIR, 'static')
+
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
